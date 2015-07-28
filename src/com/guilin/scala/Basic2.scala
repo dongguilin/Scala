@@ -23,7 +23,7 @@ class Person2(var name: String, val age: Int) {
   println("this is the primary contructor")
 
   var gender: String = _
-  val school="PDSU"
+  val school = "PDSU"
 
   //1.附属构造器名称为this
   //2.每一个附属构造器必须调用已经存在的子构造器或附属构造器
@@ -36,8 +36,9 @@ class Person2(var name: String, val age: Int) {
 class Student(name: String, age: Int, val major: String) extends Person2(name, age) {
   println("this is the subclass of Person2,major is:" + major)
 
-  override def toString="Override toString..."
-  override val school="QH"
+  override def toString = "Override toString..."
+
+  override val school = "QH"
 }
 
 object Basic2 {
@@ -46,12 +47,25 @@ object Basic2 {
 
     var p = new Person //括号可省略
     p.name = "Jack"
+    //输出 Jack,10
     println(p.name + "," + p.age)
-    //    println(p.male)
+    //        println(p.male)
 
+    /*
+    输出：
+    this is the primary contructor
+    Jacky,20,PDSU,null
+     */
     val p2 = new Person2("Jacky", 20)
-    println(p2.name + "," + p2.age + "," + p2.gender)
+    println(p2.name + "," + p2.age + "," + p2.school + "," + p2.gender)
 
+    /*
+    输出：
+    this is the primary contructor
+    this is the subclass of Person2,major is:Math
+    Override toString...
+    QH
+     */
     val stu = new Student("Justin", 20, "Math")
     println(stu.toString)
     println(stu.school)
