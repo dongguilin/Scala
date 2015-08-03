@@ -1,7 +1,8 @@
-package com.guilin.scala
+package com.guilin.scala.scalaschool
 
 /**
  * Created by guilin1 on 15/7/28.
+ * 集合
  */
 object Collection {
 
@@ -121,6 +122,24 @@ object Collection {
     println(nestedNumbers.flatMap(x => x.map(_ * 2))) //List(2, 4, 6, 8)
     //可以把它看做是“先映射后扁平化”的快捷操作
     nestedNumbers.map((x: List[Int]) => x.map(_ * 2)).flatten
+
+
+    //扩展函数组合子
+    println("------------")
+    def ourMap(numbers: List[Int], fn: Int => Int): List[Int] = {
+      numbers.foldRight(List[Int]()) { (x: Int, xs: List[Int]) =>
+        val l = fn(x) :: xs
+        println("x:" + x + " xs:" + xs + "  fn(x):  " + l)
+        l
+        //        List[Int]()
+      }
+    }
+    println(ourMap(list1, timesTwo(_))) //List(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24)
+    println("------------")
+
+    val extensions = Map("steve" -> 100, "bob" -> 101, "joe" -> 201)
+    println(extensions.filter((namePhone: (String, Int)) => namePhone._2 < 200)) //Map(steve -> 100, bob -> 101)
+    println(extensions.filter({ case (name, extension) => extension < 200 })) //Map(steve -> 100, bob -> 101)
 
 
   }
