@@ -14,6 +14,37 @@ class Account private(val id: Int, initialBlance: Double) {
 
 }
 
+class BankAccount {
+
+  //余额
+  val balance = 100
+
+  //存款
+  def deposit(num: Int) = {
+    balance + num
+  }
+
+  //收回
+  def withdraw(num: Int) = {
+    balance - num
+  }
+}
+
+class Time(val hours: String, val minutes: Int) {
+
+  val time1 = hours + ":" + minutes
+  val time2 = hours * 60 + minutes
+
+  def before(other: Time) = {
+    time1 < other.time1
+  }
+
+  def before2(other: Time) = {
+    time2 < other.time2
+  }
+
+}
+
 //简单类和无参方法
 class Counter {
   private var value = 0
@@ -22,6 +53,14 @@ class Counter {
   def increment() = {
     //方法默认是公有的
     value += 1
+  }
+
+  def increment(v: Int) = {
+    value += v
+    if (value < 0) {
+      value += Math.abs(Int.MinValue)
+    }
+    value
   }
 
   def current = value
@@ -140,8 +179,15 @@ object Account {
     Account(12.3)
 
     val myCounter = new Counter
-    myCounter.increment()
+    //    myCounter.increment()
     println(myCounter.current) //1
+    println(myCounter.increment(Int.MaxValue + 3))
+    println("--------------------------")
+
+    val bankAccount = new BankAccount
+    println(bankAccount.deposit(20)) //120
+    println(bankAccount.withdraw(10)) //90
+    println("---------------------------")
 
     val xiaoming = new Person
     println(xiaoming.age) //20
@@ -169,6 +215,12 @@ object Account {
     val barney = myFace.join("Barney")
     //wrong
     //    fred.contacts+=barney
+    println("-------------------------")
+
+
+    val time1 = new Time("03", 13)
+    val time2 = new Time("04", 13)
+    println(time1.before2(time2)) //true
 
   }
 
